@@ -1,1 +1,2 @@
-# krr_adsorption
+# KRR mdoel for adsorption prediction
+
