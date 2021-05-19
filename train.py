@@ -62,8 +62,10 @@ if use_test_particle:
             zhat = GridSearchCV(zkrr, [{"alpha": alphas, "gamma": gammas, "sigma":sigmas, "rcut": rcuts}], 
                     cv = kfolds, n_jobs = CV_jobs) 
             zhat.fit(X_train, y_train)
+            print("model fit:")
+            print(zhat.best_params_)
 
-            with open(zpath, 'rb') as f:
+            with open(zpath, 'wb') as f:
                 pickle.dump(zhat, f)
 
             predicted_z_values = zmodel.predict(Edata['processed']) 
