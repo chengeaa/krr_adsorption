@@ -1,2 +1,2 @@
-# KRR mdoel for adsorption prediction
+# KRR model for adsorption prediction
 
