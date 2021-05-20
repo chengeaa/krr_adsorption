@@ -94,7 +94,7 @@ print(predicted_z_values)
 print("true z values:")
 true_z_values = [i[-1].position[2] for i in Edata['processed']]
 print(true_z_values)
-plt.scatter(true_y_values, predicted_z_values)
+plt.scatter(true_z_values, predicted_z_values)
 plt.plot(true_z_values, true_z_values)
 plt.savefig("z_model_results.png")
 
