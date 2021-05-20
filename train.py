@@ -16,20 +16,20 @@ load_Emodel = False # train a new one and save to Epath
 test = False # set to true if in test mode
 
 kfolds = 5
-CV_jobs = 68 
+CV_jobs = 48 
 
 adslen = 5 # number of atoms in adsorbate molecule
 zrange = 1 # 
 zstep = 0.5
 
 species = ["Si", "N", "H", "C", "F", "He"] #He is the test particle species
-nalphas = 1 #number of alpha values to search over in CV
+nalphas = 2 #number of alpha values to search over in CV
 alphamin, alphamax = -10, -1
-nsigmas = 1 #number of sigma values to search over in CV
+nsigmas = 2 #number of sigma values to search over in CV
 sigmamin, sigmamax = 0.1, 1
-ngammas = 1 #number of gamma values to search over in CV
+ngammas = 2 #number of gamma values to search over in CV
 gammamin, gammamax = 0.1, 1
-nrcuts = 1 #number of rcut values to search over in CV
+nrcuts = 2 #number of rcut values to search over in CV
 rcutmin, rcutmax = 2, 10
 
 Edata = preprocessE(datadirs, adslen = adslen) #returns filtered df (valid data) with ztrue and processed columns
@@ -60,7 +60,7 @@ if use_test_particle:
             # fit z model
             zkrr = zmodel(species = species)
             zhat = GridSearchCV(zkrr, [{"alpha": alphas, "gamma": gammas, "sigma":sigmas, "rcut": rcuts}], 
-                    cv = kfolds, n_jobs = CV_jobs) 
+                    cv = kfolds, n_jobs = CV_jobs, verbose = 4) 
             zhat.fit(X_train, y_train)
             print("model fit:")
             print(zhat.best_params_)
