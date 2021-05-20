@@ -94,7 +94,7 @@ print(predicted_z_values)
 print("true z values:")
 true_y_values = [i[-1].position[2] for i in Edata['processed']]
 print(true_y_values)
-plt.plot(y_train, predicted_z_values)
+plt.plot(true_y_values, predicted_z_values)
 plt.savefig("z_model_results.png")
 
 # train E model
