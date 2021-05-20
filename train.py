@@ -1,5 +1,8 @@
 from utils import *
 from models import * 
+import matplotlib
+matplotlib.use("TkAgg")
+import matplotlib.pyplot as plt
 import pickle
 
 # set datadirs to be list where the structures, energy files, and convergence files are
@@ -89,7 +92,10 @@ else:
 print("predicted z values:")
 print(predicted_z_values)
 print("true z values:")
-print(y_train)
+true_v_values = [i[-1].position[2] for i in Edata['processed']]
+print(true_y_values)
+plt.plot(y_train, predicted_z_values)
+plt.savefig("z model results")
 
 # train E model
 
