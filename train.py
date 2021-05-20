@@ -86,7 +86,10 @@ else:
     for g in geometries:
         del g[[atom.index for atom in g if atom.index == len(g)]]
 
+print("predicted z values:")
 print(predicted_z_values)
+print("true z values:")
+print(y_train)
 
 # train E model
 
