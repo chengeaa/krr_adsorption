@@ -37,7 +37,7 @@ Edata = preprocessE(datadirs, adslen = adslen) #returns filtered df (valid data)
 if use_test_particle:
     if use_zhat:
         if load_zmodel:
-            with open(zpath, 'wb') as f:
+            with open(zpath, 'rb') as f:
                 zhat = pickle.load(f)
         else:
             data = preprocessz(datadirs, zrange = zrange, zstep = zstep, adslen = adslen) #returns filtered df (valid data) with ztrue and processed columns
