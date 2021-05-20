@@ -16,7 +16,7 @@ load_Emodel = False # train a new one and save to Epath
 test = False # set to true if in test mode
 
 kfolds = 5
-CV_jobs = 50 
+CV_jobs = 68 
 
 adslen = 5 # number of atoms in adsorbate molecule
 zrange = 1 # 

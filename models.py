@@ -45,7 +45,7 @@ class zmodel(KernelRidge, RegressorMixin):
             sigma = self.sigma
         )
 
-        print('fitting with params \nalpha: {} \nsigma: {} \nrcut: {} \ngamma: {}\n'.format(self.alpha, self.sigma, self.rcut, self.gamma))
+        # print('fitting with params \nalpha: {} \nsigma: {} \nrcut: {} \ngamma: {}\n'.format(self.alpha, self.sigma, self.rcut, self.gamma))
         
         data = pd.concat([data, getSOAPs(
             data, rcut = self.rcut, sigma = self.sigma, species = self.species)], axis = 1)
