@@ -16,20 +16,20 @@ load_Emodel = False # train a new one and save to Epath
 test = False # set to true if in test mode
 
 kfolds = 5
-CV_jobs = 4 
+CV_jobs = 50 
 
 adslen = 5 # number of atoms in adsorbate molecule
 zrange = 1 # 
 zstep = 0.5
 
 species = ["Si", "N", "H", "C", "F", "He"] #He is the test particle species
-nalphas = 2 #number of alpha values to search over in CV
+nalphas = 1 #number of alpha values to search over in CV
 alphamin, alphamax = -10, -1
-nsigmas = 2 #number of sigma values to search over in CV
+nsigmas = 1 #number of sigma values to search over in CV
 sigmamin, sigmamax = 0.1, 1
-ngammas = 2 #number of gamma values to search over in CV
+ngammas = 1 #number of gamma values to search over in CV
 gammamin, gammamax = 0.1, 1
-nrcuts = 2 #number of rcut values to search over in CV
+nrcuts = 1 #number of rcut values to search over in CV
 rcutmin, rcutmax = 2, 10
 
 Edata = preprocessE(datadirs, adslen = adslen) #returns filtered df (valid data) with ztrue and processed columns
@@ -68,7 +68,7 @@ if use_test_particle:
             with open(zpath, 'wb') as f:
                 pickle.dump(zhat, f)
 
-            predicted_z_values = zmodel.predict(Edata['processed']) 
+            predicted_z_values = zhat.predict(Edata['processed']) 
 
     elif use_rule:
         geometries = preprocessE(datadirs, adslen = adslen) #returns filtered df (valid data) with ztrue and processed columns
