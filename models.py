@@ -67,9 +67,8 @@ class Emodel(KernelRidge, RegressorMixin):
     A KRR model for predicting energy based on surface with single adsorbate. 
     """
     def __init__(
-        self, alpha = 1, kernel = 'linear', gamma = None, degree = 3, coef0=1, kernel_params=None,
+        self, species, alpha = 1, kernel = 'linear', gamma = None, degree = 3, coef0=1, kernel_params=None,
         rcut = 5, sigma = 0.1, usejitter = False, jitter = 0.25, 
-        species = ["Si", "N", "H", "C", "F", "Ar", "He"]
     ):
         self.rcut = rcut
         self.sigma = sigma
