@@ -11,7 +11,8 @@ from sklearn.metrics import mean_absolute_percentage_error, mean_absolute_error
 ########################
 
 # set datadirs to be list where the structures, energy files, and convergence files are
-datadirs = ["data/adsorb_bombed_set0/", "data/adsorb_bombed_set1/"]
+# datadirs = ["data/adsorb_bombed_set0/", "data/adsorb_bombed_set1/"]
+datadirs = ["data/adsorb_bombed_set0/"]
 zpath = "models/zhat.pkl" # pickle path + name for zmodel to save and/or read from
 Epath = "models/Ehat.pkl" # pickle path + name for Emodel to save and/or read from
 
@@ -91,7 +92,6 @@ if use_test_particle:
 
             with open(zpath, 'wb') as f:
                 pickle.dump(zhat, f)
-
 
     elif use_rule:
         pass

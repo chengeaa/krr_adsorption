@@ -166,13 +166,15 @@ def getSOAPs(geometries, species,
     return pd.Series(soaps,name = 'SOAP')
 
 
-def preprocessE(datadirs, adslen = 5):
+def preprocessE(datadirs, adslen = 5, test = False):
     """
     Preprocess data for E model with the following steps:
         Converts adsorbate molecule (last in the Atoms list) to He
         Filters out energies that are nonnegative (assumes adsorption should be at least slightly favorable, thus E < 0)
     Inputs: 
         - datadirs (list of strs): directories with .gen structures, ``energies``, and ``convergence`` files
+        - adslen: length of adsorbate in the system (ie, number of atoms in adsorbate)
+        - test: if this dataset should be used to evaluate an accuracy (ie, if simulation-calculated adsorption energies exist, read them in)
     Returns:
         - data (pd df): has columns 'E_ads' and 'processed'\ 
         with the adsorption energy and structure with He substituted, respectively.
@@ -181,13 +183,15 @@ def preprocessE(datadirs, adslen = 5):
     for datadir in datadirs:
         tempdata = readStructs(datadir)
         tempdata['processed'] = pd.Series(
-            {key: convertAdsorbateToHe(i, len(i) - adslen, np.arange(len(i) - adslen, len(i))
-                                                   ) for key, i in tempdata['geom'].items()
+            {key: convertAdsorbateToHe(i, len(i) - adslen, np.arange(len(i) - adslen, len(i))) for key, i in tempdata['geom'].items()
         })
         processed += [tempdata]
     data = pd.concat(processed).reset_index(drop = True).fillna(0)
-    validData = data['E_ads'] < 0  # adsorption energies should be negative
-    return data.loc[validData, ["E_ads", "processed"]]
+    if test:
+        validData = data['E_ads'] < 0  # adsorption energies should be negative
+        return data.loc[validData, ["E_ads", "processed"]]
+    else:
+        return data.loc[:, ["processed"]]
 
 def preprocessz(datadirs, zrange = 2, zstep = 0.25, adslen = 5):
     """
