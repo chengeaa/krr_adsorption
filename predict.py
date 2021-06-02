@@ -1,3 +1,10 @@
+from utils import preprocessE, predictz, rulez
+import pickle
+import matplotlib
+matplotlib.use("pdf")
+import matplotlib.pyplot as plt
+from sklearn.metrics import mean_absolute_percentage_error, mean_absolute_error
+from ase.atom import Atom
 ################
 ## parameters ##
 ################
@@ -9,10 +16,11 @@ test = True # set to true if testing accuracy of predictions is desired (ie, if 
 adslen = 5  # length of adsorbate
 
 datadirs = ["data/adsorb_bombed_set1/"] # make sure that these structures *do* have adsorbates placed, even if there are no simulation energies!
-data = preprocessE(datadirs, adslen = adslen, test = test) #again; start with **adsorbates** in the system; will produce test particles
+Edata = preprocessE(datadirs, adslen = adslen, test = test) #again; start with **adsorbates** in the system; will produce test particles
 
 zpath = "models/zhat.pkl" # pickle path + name for zmodel to save and/or read from
 Epath = "models/Ehat.pkl" # pickle path + name for Emodel to save and/or read from
+
 
 if use_test_particle:
     # input data has no guarantee that the initial z positions for the adsorbates are good, so give them a good start guess with rulez:
@@ -25,7 +33,7 @@ if use_test_particle:
             zhat = pickle.load(f)
         predicted_z_values = zhat.predict(Edata['processed'])
     else:
-        predicted_z_values = [g[-1].position[2] for g in Edata['processed']
+        predicted_z_values = [g[-1].position[2] for g in Edata['processed']]
         # the alternative to not using zhat is to use the rule based placement - which we already did, so just grab those z values
         
     for i, g in enumerate(Edata['processed']):
@@ -46,5 +54,6 @@ if use_test_particle:
         plt.close()
 
 else:
+    pass
     # TODO: implement a model that doesn't use test particles
 
