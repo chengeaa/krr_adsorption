@@ -1,6 +1,6 @@
-###############
-## paramters ##
-###############
+################
+## parameters ##
+################
 
 use_zhat = True # toggle for using KRR z model vs rule-based z model for test particle placement
 use_test_particle = True #whether to use test particle approach vs mean kernel approach
